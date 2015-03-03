@@ -9,7 +9,7 @@ class FedoraConnectionManager:
     __oerUri = ''
     __parserTemplates   = set()
 
-    def __init__(self, uri, templates=[], auto_retrieved=True):
+    def __init__(self, uri, templates=[]):
 
         validator = URLValidator(verify_exists=False)
 
@@ -21,9 +21,6 @@ class FedoraConnectionManager:
             for t in templates:
                 if 'OERTemplate' == t.__class__.__bases__[0].__name__:
                     self.__parserTemplates.add(t)
-
-            if True == auto_retrieved:
-                self.retrieve_information()
 
         except ValidationError, e:
             pass
@@ -42,6 +39,7 @@ class FedoraConnectionManager:
         """ Start parsing information with assigned template """
         for template in self.__parserTemplates:
             template.parse(json_response)
+
             for key in template.__dict__.keys():
                 val = getattr(template, key)
                 parsed_data[key] = val

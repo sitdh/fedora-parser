@@ -69,11 +69,13 @@ class FedoraTemplate(OERTemplate):
         self.__content_container = content_container
 
 
-    def parse(self, json_content=None):
+    def parse(self, json_content=None, parse_root_element=False):
         if None == json_content:
             json_content = self.__content_container
 
-        primary_content = json_content[0];
+        primary_content = json_content[1] if parse_root_element else json_content[0]
+        print primary_content
+        return
 
         self.object_id = primary_content[self.FEDORA_ID]
         for t in primary_content[self.FEDORA_TYPE]:

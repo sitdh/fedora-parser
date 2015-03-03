@@ -4,5 +4,5 @@ class OERTemplate(object):
         raise NotImplementedError("Please implement this method")
 
     """ Parse JSON content and parse as OERDataModle """
-    def parse(self, json_content=None):
+    def parse(self, json_content=None, is_root_element=False):
         raise NotImplementedError("Please implement this method")

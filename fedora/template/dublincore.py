@@ -6,5 +6,8 @@ class DublinCoreTemplate(OERTemplate):
     def __init__(self):
         pass
 
-    def parse(self):
-        print 'a'
+    def content(content_container):
+        pass
+
+    def parse(self, content=None):
+        pass

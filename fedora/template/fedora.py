@@ -60,12 +60,18 @@ class FedoraTemplate(OERTemplate):
     has_original_name           = ''
     has_size                    = ''
 
-    def __init__(self):
-        pass
+    __content_container         = None
+
+    def content(content_container):
+        if not content_container:
+            return
+
+        self.__content_container = content_container
+
 
     def parse(self, json_content=None):
         if None == json_content:
-            return
+            json_content = self.__content_container
 
         primary_content = json_content[0];
 
@@ -98,7 +104,6 @@ class FedoraTemplate(OERTemplate):
 
         # UUID 
         self.uuid = primary_content[self.FEDORA_UUID_URI][0][self.FEDORA_VALUE]
-        pass
 
     def _container_parser(self, primary_content):
         # exports as
@@ -127,6 +132,3 @@ class FedoraTemplate(OERTemplate):
         self.has_original_name = primary_content[self.LOC_HAS_ORIGINAL_NAME_URI][0][self.FEDORA_VALUE]
 
         self.has_size = primary_content[self.LOC_HAS_SIZE_URI][0][self.FEDORA_VALUE]
-
-    def __getattr__(self):
-        return ['a', 'b']

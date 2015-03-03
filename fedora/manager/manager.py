@@ -7,7 +7,7 @@ import requests, json
 class FedoraConnectionManager:
 
     __oerUri = ''
-    __parserTemplates = set()
+    __parserTemplates   = set()
 
     def __init__(self, uri, templates=[], auto_retrieved=True):
 
@@ -37,11 +37,13 @@ class FedoraConnectionManager:
 
         json_response = r.json()
 
+        parsed_data = dict();
+
         """ Start parsing information with assigned template """
         for template in self.__parserTemplates:
             template.parse(json_response)
-            self += template
+            for key in template.__dict__.keys():
+                val = getattr(template, key)
+                parsed_data[key] = val
 
-    def __add__(self, other):
-        for key in other.__dict__.keys():
-            setattr(self, key, other.__dict__[key])
+        return parsed_data

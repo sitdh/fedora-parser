@@ -1,1 +1,1 @@
-__all__ = ["fedora", "dublincore", "template"]
+__all__ = ["root", "fedora", "dublincore", "template"]

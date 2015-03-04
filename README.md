@@ -11,19 +11,20 @@ from fedora.template.fedora import FedoraTemplate
 from fedora.template.dublincore import DublinCoreTemplate
 from fedora.template.manager import FedoraConnectionManager
 
-endpoint = 'http:://example.com/rest/part/to/object'
+if '__main__' == __name__:
+    endpoint = 'http:://example.com/rest/part/to/object'
 
-pareser = FedoraConnectionManager(
-            endpoint,
-            templates=[ 
-                FedoraTemplate(),       
-                DublinCoreTemplate() 
-            ]
-        )
+    pareser = FedoraConnectionManager(
+                endpoint,
+                templates=[ 
+                    FedoraTemplate(),       
+                    DublinCoreTemplate() 
+                ]
+            )
 
-parsed_data = parser.retrieve_information()
+    parsed_data = parser.retrieve_information()
 
-print parsed_data
+    print parsed_data
 ```
 
 ```FedoraTemplate``` accept both of types ```nt:resource``` and ```nt:folder``` in ```#primaryType``` 

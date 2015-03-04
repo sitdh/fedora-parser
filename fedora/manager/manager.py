@@ -39,13 +39,7 @@ class FedoraConnectionManager:
 
         """ Start parsing information with assigned template """
         for template in self.__parser_templates:
-            data = template.parse(
-                    json_response, 
-                    parse_root_element=root_node
-                )
-            print data
-            # for key in template.__dict__.keys():
-            #     val = getattr(template, key)
-            #     parsed_data[key] = val
+            data = template.parse(json_response)
+            parsed_data.update(data)
 
         return parsed_data
